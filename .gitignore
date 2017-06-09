@@ -1,0 +1,6 @@
+.project
+*.iml
+
+/typings/
+/node_modules/
+/dist/

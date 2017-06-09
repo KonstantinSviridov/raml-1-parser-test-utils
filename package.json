@@ -1,0 +1,37 @@
+{
+  "name": "raml-1-parser-test-utils",
+  "version": "1.0.0",
+  "description": "Utils for launching time consuming tests in separate Travis builds",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rimraf dist && tsc"
+  },
+  "typings":"dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KonstantinSviridov/raml-1-parser-test-utils.git"
+  },
+  "keywords": [
+    "travis",
+    "git",
+    "raml",
+    "parser"
+  ],
+  "author": "Konstantin Sviridov",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/KonstantinSviridov/raml-1-parser-test-utils/issues"
+  },
+  "homepage": "https://github.com/KonstantinSviridov/raml-1-parser-test-utils#readme",
+  "dependencies": {
+    "dev-env-installer": ">=0.0.10",
+    "promise-timeout": "^1.1.1",
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.3",
+    "underscore": "^1.8.3",
+    "mkdirp": "^0.5.1",
+    "typings": "0.8.1",
+    "typescript": "1.8.7",
+    "rimraf": "*"
+  }
+}
