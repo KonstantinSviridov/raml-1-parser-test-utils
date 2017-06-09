@@ -3,6 +3,8 @@ import valuesCompare = require("./valuesCompare");
 
 export const TRAVIS_COMMIT_MESSAGE = 'TRAVIS_COMMIT_MESSAGE';
 
+export const TRAVIS_TRIGGER_FILE_NAME = "trigger.txt";
+
 export function rootDir(currentDir:string) {
     return impl.rootDir(currentDir);
 }
@@ -63,4 +65,8 @@ export interface Difference {
 
 export function compare(arg0:any,arg1:any):Difference[] {
     return valuesCompare.compare(arg0,arg1);
+}
+
+export function insertDummyChanges(rootDir:string,fileName:string=TRAVIS_TRIGGER_FILE_NAME){
+    return impl.insertDummyChanges(rootDir,fileName);
 }

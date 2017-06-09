@@ -180,3 +180,16 @@ export function deleteFolderRecursive(folder : string) {
         fs.rmdirSync(folder);
     }
 };
+
+export function insertDummyChanges(rootDir:string,fileName:string){
+    let triggerFilePath = path.resolve(rootDir,fileName);
+    let triggerFileContent = fs.readFileSync(triggerFilePath,"utf-8");
+    let triggerFileContentTrim = triggerFileContent.trim();
+    if(triggerFileContent==triggerFileContentTrim){
+        triggerFileContent = triggerFileContent + " ";
+    }
+    else{
+        triggerFileContent = triggerFileContentTrim;
+    }
+    fs.writeFileSync(triggerFilePath,triggerFileContent);
+}
