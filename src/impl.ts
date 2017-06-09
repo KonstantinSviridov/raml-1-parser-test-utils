@@ -4,6 +4,7 @@ import path = require("path");
 import devEnvInstaller = require("dev-env-installer");
 import cp = require('child_process')
 import index = require("./index");
+var gitConfig = require("parse-git-config");
 
 export function rootDir(currentDir:string) {
     let rootDir = currentDir;
@@ -46,7 +47,28 @@ export function configureSecurity(homeDir:string) {
 
 export function setSSHUrl(workingDir:string){
 
-    let repoSlug = process.env.TRAVIS_REPO_SLUG;
+    let cfg = gitConfig.sync({cwd: workingDir, path: '.git/config'});
+    let gitUrl = cfg && cfg.remote && cfg.remote.remote && cfg.remote.remote.url;
+    if(!gitUrl){
+        return;
+    }
+    if(gitUrl.indexOf("@")>0){
+        return;
+    }
+    let ind = gitUrl.lastIndexOf("/");
+    if(ind<0){
+        return;
+    }
+    let repoName = gitUrl.substring(ind+1);
+    if(repoName.length>=".git".length){
+        ind = repoName.lastIndexOf(".");
+        if(ind>=0){
+            if(repoName.substring(ind)==".git"){
+                repoName = repoName.sibstring(0,ind);
+            }
+        }
+    }
+    let repoSlug = repoName;//process.env.TRAVIS_REPO_SLUG;
     if(!repoSlug){
         return;
     }
