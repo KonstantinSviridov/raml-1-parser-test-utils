@@ -1,6 +1,6 @@
 {
   "name": "raml-1-parser-test-utils",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Utils for launching time consuming tests in separate Travis builds",
   "main": "dist/index.js",
   "scripts": {

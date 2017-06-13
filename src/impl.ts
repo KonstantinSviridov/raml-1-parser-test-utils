@@ -60,6 +60,10 @@ export function setSSHUrl(workingDir:string){
     if(ind<0){
         return;
     }
+    ind = gitUrl.lastIndexOf("/",ind-1);
+    if(ind<0){
+        return;
+    }
     let repoName = gitUrl.substring(ind+1);
     if(repoName.length>=".git".length){
         ind = repoName.lastIndexOf(".");
