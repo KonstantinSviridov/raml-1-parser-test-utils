@@ -49,7 +49,7 @@ export function configureSecurity(homeDir:string) {
 export function setSSHUrl(workingDir:string){
 
     let cfg = gitConfig.sync({cwd: workingDir, path: '.git/config'});
-    let gitUrl = cfg && cfg.remote && cfg.remote.remote && cfg.remote.remote.url;
+    let gitUrl = cfg && cfg["remote \"origin\""] && cfg["remote \"origin\""].url;
     if(!gitUrl){
         return;
     }
