@@ -70,3 +70,7 @@ export function compare(arg0:any,arg1:any):Difference[] {
 export function insertDummyChanges(rootDir:string,fileName:string=TRAVIS_TRIGGER_FILE_NAME){
     return impl.insertDummyChanges(rootDir,fileName);
 }
+
+export function pluginBranch(pluginName:string,folderOrDescriptor:string, rootFolder?:string):string{
+    return impl.pluginBranch(pluginName,folderOrDescriptor,rootFolder);
+}

@@ -5,6 +5,7 @@ import devEnvInstaller = require("dev-env-installer");
 import cp = require('child_process')
 import index = require("./index");
 var gitConfig = require("parse-git-config");
+var gitBranch = require("git-branch");
 
 export function rootDir(currentDir:string) {
     let rootDir = currentDir;
@@ -214,4 +215,49 @@ export function insertDummyChanges(rootDir:string,fileName:string){
         triggerFileContent = triggerFileContentTrim;
     }
     fs.writeFileSync(triggerFilePath,triggerFileContent);
+}
+
+
+export function pluginBranch(pluginName:string,folderOrDescriptor:string, rootFolder?:string):string{
+
+    let descriptor:string = folderOrDescriptor;
+    if(fs.lstatSync(descriptor).isDirectory()){
+        descriptor = path.resolve(descriptor,"workspace.json");
+    }
+    if(!fs.existsSync(descriptor)){
+        return null;
+    }
+    rootFolder = rootFolder || path.dirname(descriptor);
+    let modulesMap = devEnvInstaller.utils.loadModulesStaticInfo(descriptor);
+    if(!modulesMap){
+        return null;
+    }
+    let moduleInfo = modulesMap[pluginName];
+    if(!moduleInfo){
+        return null;
+    }
+    let branchName = moduleInfo.gitBranch;
+    if(typeof branchName == "string"){
+        return branchName;
+    }
+    let packagejsonfile = path.resolve(rootFolder,"package.json");
+    if(!fs.existsSync(packagejsonfile)){
+        return null;
+    }
+    try {
+        let packagejson = JSON.parse(fs.readFileSync(packagejsonfile,"utf8"));
+        if(packagejson.name != pluginName){
+            return null;
+        }
+    }
+    catch (e){
+        console.log(e);
+        return null;
+    }
+
+    branchName = gitBranch.sync(rootFolder);
+    if(typeof branchName == "string") {
+        return branchName;
+    }
+    return null;
 }
