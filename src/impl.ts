@@ -254,6 +254,10 @@ export function pluginBranch(pluginName:string,folderOrDescriptor:string, rootFo
         console.log(e);
         return null;
     }
+    branchName = process.env.TRAVIS_BRANCH;
+    if(branchName){
+        return branchName;
+    }
 
     branchName = gitBranch.sync(rootFolder);
     if(typeof branchName == "string") {
