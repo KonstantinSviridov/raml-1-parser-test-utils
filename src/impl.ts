@@ -51,36 +51,25 @@ export function configureSecurity(homeDir:string) {
 
 export function setSSHUrl(workingDir:string){
 
-    console.log("Setting SSH URL")
-
     let cfg = gitConfig.sync({cwd: workingDir, path: '.git/config'});
-    console.log("GIT config: ");
-    console.log(JSON.stringify(cfg,null,2));
     let gitUrl = cfg && cfg["remote \"origin\""] && cfg["remote \"origin\""].url;
-    console.log("GIT URL: " + gitUrl);
     if(!gitUrl){
         console.log("exit 0");
         return;
     }
-    console.log("Got GIT url");
     if(gitUrl.indexOf("@")>0){
-        console.log("exit 1");
         return;
     }
-    console.log("No '@'");
     let ind = gitUrl.lastIndexOf("/");
     if(ind<0){
-        console.log("exit 2");
         return;
     }
-    console.log("Got backslash 1");
     ind = gitUrl.lastIndexOf("/",ind-1);
     if(ind<0){
-        console.log("exit 3");
         return;
     }
-    console.log("Got backslash 2");
     let repoName = gitUrl.substring(ind+1);
+    console.log("repoName: " + repoName);
     if(repoName.length>=".git".length){
         ind = repoName.lastIndexOf(".");
         if(ind>=0){
