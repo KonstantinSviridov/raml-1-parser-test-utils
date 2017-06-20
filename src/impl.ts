@@ -69,16 +69,22 @@ export function setSSHUrl(workingDir:string){
         return;
     }
     let repoName = gitUrl.substring(ind+1);
-    console.log("repoName: " + repoName);
-    if(repoName.length>=".git".length){
+    console.log("A");
+    if(repoName.length >= ".git".length){
+        console.log("B");
         ind = repoName.lastIndexOf(".");
         if(ind>=0){
+            console.log("C");
             if(repoName.substring(ind)==".git"){
+                console.log("D");
                 repoName = repoName.sibstring(0,ind);
             }
         }
+        console.log("E");
     }
+    console.log("F");
     let repoSlug = repoName;//process.env.TRAVIS_REPO_SLUG;
+    console.log("G");
     console.log("Repo slug: " + repoSlug);
     if(!repoSlug){
         console.log("exit 4");
