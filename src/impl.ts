@@ -62,20 +62,24 @@ export function setSSHUrl(workingDir:string){
         console.log("exit 0");
         return;
     }
+    console.log("Got GIT url");
     if(gitUrl.indexOf("@")>0){
         console.log("exit 1");
         return;
     }
+    console.log("No '@'");
     let ind = gitUrl.lastIndexOf("/");
     if(ind<0){
         console.log("exit 2");
         return;
     }
+    console.log("Got backslash 1");
     ind = gitUrl.lastIndexOf("/",ind-1);
     if(ind<0){
         console.log("exit 3");
         return;
     }
+    console.log("Got backslash 2");
     let repoName = gitUrl.substring(ind+1);
     if(repoName.length>=".git".length){
         ind = repoName.lastIndexOf(".");
