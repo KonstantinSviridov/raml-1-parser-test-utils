@@ -39,6 +39,9 @@ export function configureSecurity(homeDir:string) {
         let keyPrivateContent = `-----BEGIN RSA PRIVATE KEY-----${privateKeyFormatted}-----END RSA PRIVATE KEY-----\n`;
         let keyPublicContent = `ssh-rsa ${TRAVIS_KEY_PUBLIC} RSA-1024\n`;
 
+        console.log("private key file: " + keyPrivate);
+        console.log("public key file: " + keyPublic);
+
         fs.writeFileSync(keyPrivate, keyPrivateContent);
         fs.writeFileSync(keyPublic, keyPublicContent);
         fs.chmodSync(keyPrivate, 16832);
@@ -102,6 +105,10 @@ export function contributeTheStorage(
     paths:string[],
     messageOrFileName:string,
     messageFromFile=false){
+
+    console.log("message or filename: " + messageOrFileName);
+    console.log("workingDir: " + messageOrFileName);
+    console.log("paths:\n" + paths.join('\n'));
 
     let rd = workingDir;
 
