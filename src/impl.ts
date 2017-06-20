@@ -85,6 +85,8 @@ export function setSSHUrl(workingDir:string){
         return;
     }
     let command = `git remote set-url origin git@github.com:${repoSlug}.git`;
+    console.log("working dir: " + workingDir);
+    console.log("set URL command: " + command);
     devEnvInstaller.utils.execProcess(command,workingDir,true);
 }
 
