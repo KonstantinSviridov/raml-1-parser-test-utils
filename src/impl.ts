@@ -59,17 +59,21 @@ export function setSSHUrl(workingDir:string){
     let gitUrl = cfg && cfg["remote \"origin\""] && cfg["remote \"origin\""].url;
     console.log("GIT URL: " + gitUrl);
     if(!gitUrl){
+        console.log("exit 0");
         return;
     }
     if(gitUrl.indexOf("@")>0){
+        console.log("exit 1");
         return;
     }
     let ind = gitUrl.lastIndexOf("/");
     if(ind<0){
+        console.log("exit 2");
         return;
     }
     ind = gitUrl.lastIndexOf("/",ind-1);
     if(ind<0){
+        console.log("exit 3");
         return;
     }
     let repoName = gitUrl.substring(ind+1);
@@ -82,7 +86,9 @@ export function setSSHUrl(workingDir:string){
         }
     }
     let repoSlug = repoName;//process.env.TRAVIS_REPO_SLUG;
+    console.log("Repo slug: " + repoSlug);
     if(!repoSlug){
+        console.log("exit 4");
         return;
     }
     let command = `git remote set-url origin git@github.com:${repoSlug}.git`;
