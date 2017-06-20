@@ -57,6 +57,7 @@ export function setSSHUrl(workingDir:string){
     console.log("GIT config: ");
     console.log(JSON.stringify(cfg,null,2));
     let gitUrl = cfg && cfg["remote \"origin\""] && cfg["remote \"origin\""].url;
+    console.log("GIT URL: " + gitUrl);
     if(!gitUrl){
         return;
     }
