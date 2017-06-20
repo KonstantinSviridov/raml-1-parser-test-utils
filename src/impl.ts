@@ -48,7 +48,11 @@ export function configureSecurity(homeDir:string) {
 
 export function setSSHUrl(workingDir:string){
 
+    console.log("Setting SSH URL")
+
     let cfg = gitConfig.sync({cwd: workingDir, path: '.git/config'});
+    console.log("GIT config: ");
+    console.log(JSON.stringify(cfg,null,2));
     let gitUrl = cfg && cfg["remote \"origin\""] && cfg["remote \"origin\""].url;
     if(!gitUrl){
         return;
