@@ -46,6 +46,10 @@ ${label1}: ${strValue1}`
         return this._path;
     }
 
+    comment():string{
+        return this._comment;
+    }
+
 }
 
 export function compare(arg0:any,arg1:any,path:string=''):Diff[] {
