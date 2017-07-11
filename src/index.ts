@@ -61,6 +61,8 @@ export interface Difference {
     values():any[]
 
     path():string
+
+    comment():string
 }
 
 export function compare(arg0:any,arg1:any):Difference[] {
